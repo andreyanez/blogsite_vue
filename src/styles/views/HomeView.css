@@ -472,30 +472,53 @@ body.light-theme{
     left: 2rem;
 }
 
-.article.swiper-slide{
-    height: 40rem;
-}
 
 /* Quick read - Swiper */
 .swiper-wrapper{
     height: auto;
 }
-.swiper-controls{
+
+.quick-read .swiper-slide{
+    height: 40rem;
+}
+
+.quick-read .article{
+    height: 100%;
+    display: block;
+}
+
+.quick-read .swiper-button-prev{
     width: 3.5rem;
     height: 3.5rem;
     background-color: var(--secondary-background-color);
 }
 
-.swiper-controls::after{
+.quick-read .swiper-button-next{
+    width: 3.5rem;
+    height: 3.5rem;
+    background-color: var(--secondary-background-color);
+}
+
+.quick-read .swiper-button-prev::after{
     font-size: 1.6rem;
     color: var(--light-color);
 }
 
-.swiper-pagination{
-    bottom: .5rem !important;
+.quick-read .swiper-button-next::after{
+    font-size: 1.6rem;
+    color: var(--light-color);
 }
 
-.swiper-pagination-bullet{
+.quick-read .swiper .swiper-button-next.swiper-button-disabled, .swiper-button-prev.swiper-button-disabled{
+    pointer-events: all !important;
+}
+
+
+.quick-read .swiper .swiper-pagination{
+    bottom: .5rem;
+}
+
+.quick-read .swiper .swiper-pagination-bullet{
     background-color:var(--light-color);
 }
 
