@@ -4,90 +4,26 @@
           <h2 class="title section-title" data-name="Quick read">Quick read</h2>
           <swiper
                 :modules="modules"
-                :slides-per-view="1"
+                :slides-per-view="3"
                 :space-between="20"
-                navigation
+                 navigation
                 :pagination="{ clickable: true }"
                 @swiper="onSwiper"
                 @slideChange="onSlideChange"
+                :breakpoints="swiperOptions.breakpoints"
             >
-            <swiper-slide>
-                  <a href="#" class="article">
+            <swiper-slide v-for="post in getPosts" :key="post.id">
+                  <router-link :to="{name: 'home'}" class="article">
                       <img src="../assets/images/quick_read/quick_read_1.jpg" alt="" class="article-image">
                       <div class="article-data-container">
                           <div class="article-data">
-                              <span>23 Dec 2021</span>
+                              <span>{{post.createdAt}}</span>
                               <span class="article-data-spacer"></span>
-                              <span>3 Min read</span>
+                              <span>{{post.readTime}} Min read</span>
                           </div>
-                          <h3 class="title article-title">Sample article title</h3>
+                          <h3 class="title article-title">{{post.title}}</h3>
                       </div>
-                  </a>
-            </swiper-slide>
-            <swiper-slide>
-                  <a href="#" class="article">
-                      <img src="../assets/images/quick_read/quick_read_2.jpg" alt="" class="article-image">
-                      <div class="article-data-container">
-                          <div class="article-data">
-                              <span>23 Dec 2021</span>
-                              <span class="article-data-spacer"></span>
-                              <span>3 Min read</span>
-                          </div>
-                          <h3 class="title article-title">Sample article title</h3>
-                      </div>
-                  </a>
-            </swiper-slide>
-            <swiper-slide>
-                  <a href="#" class="article">
-                      <img src="../assets/images/quick_read/quick_read_3.jpg" alt="" class="article-image">
-                      <div class="article-data-container">
-                          <div class="article-data">
-                              <span>23 Dec 2021</span>
-                              <span class="article-data-spacer"></span>
-                              <span>3 Min read</span>
-                          </div>
-                          <h3 class="title article-title">Sample article title</h3>
-                      </div>
-                  </a>
-            </swiper-slide>
-            <swiper-slide>
-                  <a href="#" class="article">
-                      <img src="../assets/images/quick_read/quick_read_4.jpg" alt="" class="article-image">
-                      <div class="article-data-container">
-                          <div class="article-data">
-                              <span>23 Dec 2021</span>
-                              <span class="article-data-spacer"></span>
-                              <span>3 Min read</span>
-                          </div>
-                          <h3 class="title article-title">Sample article title</h3>
-                      </div>
-                  </a>
-            </swiper-slide>
-            <swiper-slide>
-                <a href="#" class="article swiper-slide">
-                    <img src="../assets/images/quick_read/quick_read_5.jpg" alt="" class="article-image">
-                    <div class="article-data-container">
-                        <div class="article-data">
-                            <span>23 Dec 2021</span>
-                            <span class="article-data-spacer"></span>
-                            <span>3 Min read</span>
-                        </div>
-                        <h3 class="title article-title">Sample article title</h3>
-                    </div>
-                </a>
-            </swiper-slide>
-            <swiper-slide>
-                <a href="#" class="article swiper-slide">
-                    <img src="../assets/images/quick_read/quick_read_6.jpg" alt="" class="article-image">
-                    <div class="article-data-container">
-                        <div class="article-data">
-                            <span>23 Dec 2021</span>
-                            <span class="article-data-spacer"></span>
-                            <span>3 Min read</span>
-                        </div>
-                        <h3 class="title article-title">Sample article title</h3>
-                    </div>
-                </a>
+                  </router-link>
             </swiper-slide>
           </swiper>
       </div>
@@ -100,13 +36,14 @@ import { Navigation, Pagination, Scrollbar, A11y } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import 'swiper/css/bundle'
 export default {
+  props: ['posts'],
   components: {
     Swiper,
     SwiperSlide
   },
   setup () {
     const onSwiper = (swiper) => {
-      console.log(swiper)
+      console.log('soy swiper')
     }
     const onSlideChange = () => {
       console.log('slide change')
@@ -115,6 +52,25 @@ export default {
       onSwiper,
       onSlideChange,
       modules: [Navigation, Pagination, Scrollbar, A11y]
+    }
+  },
+  data () {
+    return {
+      swiperOptions: {
+        breakpoints: {
+          700: {
+            slidesPerView: 2
+          },
+          1200: {
+            slidesPerView: 3
+          }
+        }
+      }
+    }
+  },
+  computed: {
+    getPosts () {
+      return this.posts.filter(post => post.readTime < 5)
     }
   }
 

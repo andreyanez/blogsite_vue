@@ -14,6 +14,7 @@
     --transparent-light-color: rgba(255,255,255,.05);
     --transparent-dark-color: rgba(0,0,0,.75);
     --font-family: 'Poppins', sans-serif;
+    --font-size-sxsm: 1rem;
     --font-size-xsm: 1.2rem;
     --font-size-sm: 1.6rem;
     --font-size-md: 2.4rem;
@@ -386,7 +387,7 @@ body.light-theme{
     display: flex;
     align-items: center;
     gap: var(--gap);
-    font-size: var(--font-size-xsm);
+    font-size: var(--font-size-sxsm);
     margin-bottom: 1rem;
 }
 
@@ -767,7 +768,8 @@ body.light-theme{
 
     .trending-news-data{
         margin: auto;
-        text-align: center;
+        text-align: left;
+        width: 66%;
     }
     
     .newsletter-description{
