@@ -21,6 +21,7 @@
 <script>
 import featuredPosts from '@/components/featuredPosts.vue'
 import latestPosts from '@/components/latestPosts.vue'
+import { computed } from '@vue/runtime-core'
 
 export default {
   name: 'featuredArticles',
@@ -29,10 +30,11 @@ export default {
     featuredPosts,
     latestPosts
   },
-  computed: {
-    lastPost () {
-      return this.posts.filter((post, index) => index < 1)
-    }
+  setup (props) {
+    const lastPost = computed(() => {
+      return props.posts.filter((post, index) => index < 1)
+    })
+    return { lastPost }
   }
 }
 </script>
